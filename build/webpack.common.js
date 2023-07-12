@@ -1,6 +1,9 @@
 const path = require("path"); // 引用path模块
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const ESLintWebpackPlugin = require("eslint-webpack-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
+const { DefinePlugin } = require("webpack");
+
 // nodejs核心模块，直接使用
 const os = require("os");
 // cpu核数
@@ -14,8 +17,18 @@ module.exports = {
     // },
     module: {
         rules: [
-            {
-                oneOf: [
+                    // vue-loader不支持oneOf
+                    {
+                        test: /\.vue$/,
+                        loader: "vue-loader", // 内部会给vue文件注入HMR功能代码
+                        options: {
+                            // 开启缓存
+                            cacheDirectory: path.resolve(
+                                __dirname,
+                                "node_modules/.cache/vue-loader"
+                            ),
+                        },
+                    },
                     {
                         test: /\.(png|jpe?g|gif|webp)$/,
                         type: "asset",
@@ -59,12 +72,19 @@ module.exports = {
                                 },
                             },
                         ],
-                    }
-                    ]
-            }
+                    },
+
         ],
     },
+    resolve: {
+        extensions: [".vue", ".js", ".json"], // 自动补全文件扩展名，让vue可以使用
+    },
     plugins: [
+        new DefinePlugin({
+            __VUE_OPTIONS_API__: "true",
+            __VUE_PROD_DEVTOOLS__: "false",
+        }),
+        new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname,"../public/index.html"),
             filename: "index.html",

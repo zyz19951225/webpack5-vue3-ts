@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "allowJs": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": false,
+    "noEmitOnError": false,
+    "strictNullChecks": false
+//    "types": ["webpack-env"]
+  },
+//  "include": ["src/**/*.ts", "src/**/*.vue","*.d.ts"],
+  "exclude": ["node_modules"]
+}

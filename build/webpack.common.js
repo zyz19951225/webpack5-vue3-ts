@@ -10,9 +10,9 @@ const os = require("os");
 const threads = os.cpus().length;
 
 module.exports = {
-     entry:path.resolve(__dirname,"../src/main.js"),
+     entry:path.resolve(__dirname,"../src/main.ts"),
     // entry: {
-    //     main: path.resolve(__dirname,"../src/main.js"),
+    //     main: path.resolve(__dirname,"../src/main.ts"),
     //     app: path.resolve(__dirname,"../src/app.js"),
     // },
     module: {
@@ -73,6 +73,14 @@ module.exports = {
                             },
                         ],
                     },
+            {
+                test: /\.ts$/,
+                loader: 'ts-loader',
+                exclude: /node_modules/,
+                options: {
+                    appendTsSuffixTo: [/\.vue$/],
+                },
+            },
 
         ],
     },

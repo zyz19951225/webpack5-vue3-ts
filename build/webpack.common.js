@@ -3,6 +3,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 const ESLintWebpackPlugin = require("eslint-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
 const { DefinePlugin } = require("webpack");
+const AutoImport = require('unplugin-auto-import/webpack')
+const Components = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 
 // nodejs核心模块，直接使用
 const os = require("os");
@@ -88,6 +91,12 @@ module.exports = {
         extensions: [".vue", ".js", ".json"], // 自动补全文件扩展名，让vue可以使用
     },
     plugins: [
+        AutoImport({
+            resolvers: [ElementPlusResolver()],
+        }),
+        Components({
+            resolvers: [ElementPlusResolver()],
+        }),
         new DefinePlugin({
             __VUE_OPTIONS_API__: "true",
             __VUE_PROD_DEVTOOLS__: "false",

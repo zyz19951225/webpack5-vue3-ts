@@ -1,5 +1,11 @@
 <template>
   <h1 class="title">{{test}}</h1>
+  <el-button>Default</el-button>
+  <el-button type="primary">Primary</el-button>
+  <el-button type="success">Success</el-button>
+  <el-button type="info">Info</el-button>
+  <el-button type="warning">Warning</el-button>
+  <el-button type="danger">Danger</el-button>
   <h1 class="title">hello app</h1>
   <ul>
     <li>

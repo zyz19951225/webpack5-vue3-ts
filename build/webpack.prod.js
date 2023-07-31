@@ -16,61 +16,7 @@ module.exports = merge(common, {
         chunkFilename: "static/js/[name].chunk.js", // 动态导入输出资源命名方式
         assetModuleFilename: "static/media/[name].[hash][ext]", // 图片、字体等资源命名方式（注意用hash）
     },
-    module: {
-        rules: [
-            {
-                oneOf: [
-                    {
-                        // 用来匹配 .css 结尾的文件
-                        test: /\.css$/,
-                        // use 数组里面 Loader 执行顺序是从右到左
-                        use: [MiniCssExtractPlugin.loader, "css-loader",
-                            {
-                                loader: "postcss-loader",
-                                options: {
-                                    postcssOptions: {
-                                        plugins: [
-                                            "postcss-preset-env", // 能解决大多数样式兼容性问题
-                                        ],
-                                    },
-                                },
-                            },],
-                    },
-                    {
-                        test: /\.less$/,
-                        use: [MiniCssExtractPlugin.loader, "css-loader",
-                            {
-                                loader: "postcss-loader",
-                                options: {
-                                    postcssOptions: {
-                                        plugins: [
-                                            "postcss-preset-env", // 能解决大多数样式兼容性问题
-                                        ],
-                                    },
-                                },
-                            },
-                            "less-loader"],
-                    },
-                    {
-                        test: /\.s[ac]ss$/,
-                        use: [MiniCssExtractPlugin.loader, "css-loader",
-                            {
-                                loader: "postcss-loader",
-                                options: {
-                                    postcssOptions: {
-                                        plugins: [
-                                            "postcss-preset-env", // 能解决大多数样式兼容性问题
-                                        ],
-                                    },
-                                },
-                            },
-                            "sass-loader"],
-                    }
-                ]
-            }
-
-        ],
-    },
+    module: {},
     plugins: [
         // 提取css成单独文件
         new MiniCssExtractPlugin({
